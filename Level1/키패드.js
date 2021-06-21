@@ -20,18 +20,18 @@ const initPhone = () => {
 
 const isLeftRight = (phone, numbers, leftPos, rightPos, hand, history) => {
     for(const number of numbers) {
-        if(number >= 1 && number <= 3) {
+        if(number === 1 || number === 4 || number === 7) {
             leftPos = phone.get(number);
             history += 'L'
-        } else if(number >= 7 && number <= 9) {
+        } else if(number === 3 || number === 6 || number === 9) {
             rightPos = phone.get(number);
             history += 'R';
         } else {
             const temp = phone.get(number);
-            if(Math.abs((leftPos[0] - temp[0]) + Math.abs(leftPos[1] - temp[1])) < Math.abs((rightPos[0] - temp[0]) + Math.abs(rightPos[1] - temp[1]))) {
+            if(Math.abs(leftPos[0] - temp[0]) + Math.abs(leftPos[1] - temp[1]) < Math.abs(rightPos[0] - temp[0]) + Math.abs(rightPos[1] - temp[1])) {
                 leftPos = phone.get(number);
                 history += 'L';
-            } else if (Math.abs((leftPos[0] - temp[0]) + Math.abs(leftPos[1] - temp[1])) > Math.abs((rightPos[0] - temp[0]) + Math.abs(rightPos[1] - temp[1]))) {
+            } else if (Math.abs(leftPos[0] - temp[0]) + Math.abs(leftPos[1] - temp[1]) > Math.abs(rightPos[0] - temp[0]) + Math.abs(rightPos[1] - temp[1])) {
                 rightPos = phone.get(number);
                 history += 'R';
             } else if(hand === "left") {
