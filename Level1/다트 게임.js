@@ -46,7 +46,7 @@ const solution = (dartResult) => {
     }
 
     // 점수 담아놓은 배열 합 구하기
-    for(const score of scores) totalScore += score;
+    totalScore = scores.reduce((prev, curr) => prev + curr);
 
     return totalScore;
 }
