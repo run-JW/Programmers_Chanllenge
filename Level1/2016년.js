@@ -9,7 +9,6 @@
 * @param {Number} b 일
 * @returns {String} 요일
 */
-
 const solution = (a, b) => {
     const map = new Map([
         [0, 'MON'], [1, 'TUE'], [2, 'WED'],
