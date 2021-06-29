@@ -5,10 +5,9 @@
 * 2. 이중 반복을 통한 배열에서 두 수를 뽑아 덧셈
 * 3. Set -> array로 바꾸기 위해 전개(spread) 연산자(...) 사용 후 오름차순 정렬.
 *
-* @param {Array} numbers 숫자들이 들어 있는 배열
-* @returns {Array} 
+* @param {Array} numbers Array of numbers
+* @returns {Array} Array of numbers
 */
-
 const solution = (numbers) => {
     const set = new Set();
     for(let i = 0; i < numbers.length - 1; i++) {
