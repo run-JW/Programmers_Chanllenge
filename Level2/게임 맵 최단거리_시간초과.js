@@ -27,6 +27,8 @@ function checkRoute(maps, x, y, searched) {
     const tempList = [];
     const routeList = [];
     const [n, m] = [maps.length, maps[0].length];
+    
+    /*
     if (x < n - 1)
         if (maps[x + 1][y] === 1) tempList.push([x + 1, y]);
     if (y < m - 1)
@@ -45,6 +47,16 @@ function checkRoute(maps, x, y, searched) {
         }
         if (isChecked === false) routeList.push(tempList[i]);
     }
+    */
+    if (x < n - 1)
+        if (maps[x + 1][y] === 1 && !JSON.stringify(searched).includes(`[${x + 1},${y}]`)) routeList.push([x + 1, y]);
+    if (y < m - 1)
+        if (maps[x][y + 1] === 1 && !JSON.stringify(searched).includes(`[${x},${y + 1}]`)) routeList.push([x, y + 1]);
+    if (x > 0)
+        if (maps[x - 1][y] === 1 && !JSON.stringify(searched).includes(`[${x - 1},${y}]`)) routeList.push([x - 1, y]);
+    if (y > 0)
+        if (maps[x][y - 1] === 1 && !JSON.stringify(searched).includes(`[${x},${y - 1}]`)) routeList.push([x, y - 1]);
+    
 
     return routeList;
 }
