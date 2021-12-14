@@ -11,8 +11,6 @@ class Cache {
             return;
         }
         
-        if (typeof data !== 'string') return;
-        
         const processedData = data.toLowerCase();
         const cacheIndex = this._cache.indexOf(processedData);
         // 캐시 내에 데이터가 있는가?
