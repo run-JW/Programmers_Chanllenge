@@ -23,15 +23,13 @@ class Cache {
                 this.cacheHit();
             }    
         } else {
-            // 데이터가 없으면
+            // 데이터가 없으면 꽉 차있는지 확인한다.
             if (this.isFull()) {
-                // 꽉 찼다.
                 this._cache.shift();
                 this._cache.push(processedData);
                 this.cacheMiss();
             }
             else {
-                // 꽉 안찼다.
                 this._cache.push(processedData);
                 this.cacheMiss();
             }
