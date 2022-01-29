@@ -3,6 +3,7 @@ function solution(id_list, report, k) {
                             .join(' ')
                             .split(' ');
     const dataCenter = {};
+    const successedReporters = [];
     
     while (realReport.length) {
         const crimer = realReport.pop();
@@ -14,5 +15,10 @@ function solution(id_list, report, k) {
         dataCenter[`${crimer}`].push(reporter);
     }
     
+    for (const crimer of Object.keys(dataCenter)) {
+        if (crimer.length >= k) {
+            successedReporters.push(...crimer);
+        }
+    }
     
 }
