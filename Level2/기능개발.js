@@ -29,7 +29,7 @@ function getDeliveryVolumes(counts) {
     let count = 1;
     let temp = counts[0];
     for (let i = 1; i < counts.length; i++) {
-        if (temp < counts[i]) {
+        if (temp >= counts[i]) {
             count++;
         } else {
             output.push(count);
@@ -37,5 +37,7 @@ function getDeliveryVolumes(counts) {
             count = 1;
         }
     }
+    output.push(count);
+    
     return output;
 }
