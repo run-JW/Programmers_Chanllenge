@@ -1,8 +1,15 @@
 function solution(bridge_length, weight, truck_weights) {
     const onBridge = [];
     let seconds = 0;
+    const info = [];
     
-    while (truck_weights.length || onBridge.length) {
+    truck_weights.forEach((el) => {
+        const data = {};
+        data[`${el}`] = bridge_length;
+        info.push(data);
+    });
+    
+    while (info.length || onBridge.length) {
         seconds++;
         if (onBridge.length) {
             const curWeight = onBridge.reduce(sum);
