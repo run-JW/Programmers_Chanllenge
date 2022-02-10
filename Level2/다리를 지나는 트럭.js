@@ -1,32 +1,56 @@
-function solution(bridge_length, weight, truck_weights) {
-    const onBridge = [];
-    let seconds = 0;
-    const info = [];
-    
-    truck_weights.forEach((el) => {
-        const data = {};
-        data[`${el}`] = bridge_length;
-        info.push(data);
-    });
-    
-    while (info.length || onBridge.length) {
-        seconds++;
-        if (onBridge.length) {
-            const curWeight = onBridge.reduce(sum);
-            if (curWeight + truck_weights[0] <= weight) {
-                onBridge.push(truck_weights.shift());
-            }
-        } else {
-            onBridge.push(truck_weights.shift());
-        }
-        if (onBridge.reduce(sum) + truck_weights[0] <= weight) {
-            onBridge.push(truck_weights.shift());
-        }
-        if (seconds % bridge_length === 0)
-            onBridge.shift();
+class Bridge {
+    constructor(weight, length) {
+        this._weight = weight;
+        this._queue = [];
+        this._timeCount = 0;
+        this._weightSum = 0; 
+        
+        this.length = length;
     }
-    
-    return seconds;
+
+    set length(n) {
+        for (let i = 0; i < n; i++) {
+            this._queue.push(0);
+        }
+    }
+
+    get timeCount() {
+        return this._timeCount;
+    }
+
+    get weightSum() {
+        return this._weightSum;
+    }
+
+    onTruck(truck) {
+        this._queue.shift();
+        this._queue.push(truck);
+        this._weightSum += truck;
+        this._timeCount++;
+    }
+
+    runTime() {
+        const outTruck = this._queue.shift();
+        this._weightSum -= outTruck;
+        this._queue.push(0);
+        this._timeCount++;
+    }
+
+    weightCheck() {
+        return (this._weightSum <= this._weight) ? true : false;
+    }
 }
-    
-const sum = (x, y) => x + y;
+
+function solution(bridge_length, weight, truck_weights) {
+    const bridge = new Bridge(weight, bridge_length);
+
+    while (truck_weights.length || bridge.weightSum) {
+        if (bridge.weightCheck() && truck_weights.length) {
+            bridge.onTruck(truck_weights.shift());
+        } else {
+            bridge.runTime();
+        }
+    }
+
+    return bridge.timeCount;
+}
